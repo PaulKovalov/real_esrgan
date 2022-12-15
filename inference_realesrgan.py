@@ -9,13 +9,10 @@ from realesrgan import RealESRGANer
 from realesrgan.archs.srvgg_arch import SRVGGNetCompact
 
 
-def main(args=None):
+def main(interface_args=None):
     """Inference demo for Real-ESRGAN.
     """
-    if args:
-        parser = argparse.ArgumentParser(args)
-    else:
-        parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
 
     parser.add_argument('-i', '--input', type=str, default='inputs', help='Input image or folder')
     parser.add_argument(
@@ -56,7 +53,10 @@ def main(args=None):
     parser.add_argument(
         '-g', '--gpu-id', type=int, default=None, help='gpu device to use (default=None) can be 0,1,2 for multi-gpu')
 
-    args = parser.parse_args()
+    if interface_args:
+        args = parser.parse_args(interface_args)
+    else:
+        args = parser.parse_args()
 
     # determine models according to model names
     args.model_name = args.model_name.split('.')[0]
