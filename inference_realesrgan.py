@@ -9,10 +9,14 @@ from realesrgan import RealESRGANer
 from realesrgan.archs.srvgg_arch import SRVGGNetCompact
 
 
-def main():
+def main(args=None):
     """Inference demo for Real-ESRGAN.
     """
-    parser = argparse.ArgumentParser()
+    if args:
+        parser = argparse.ArgumentParser(args)
+    else:
+        parser = argparse.ArgumentParser()
+
     parser.add_argument('-i', '--input', type=str, default='inputs', help='Input image or folder')
     parser.add_argument(
         '-n',
@@ -162,5 +166,5 @@ def main():
             cv2.imwrite(save_path, output)
 
 
-if __name__ == '__main__':
-    main()
+def upscale_interface(args):
+    main(args)
